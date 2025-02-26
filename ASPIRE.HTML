@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASPIRE The Future - Your Gateway to Germany</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #1a5f7a;
+            --secondary: #e63946;
+            --accent: #2ecc71;
+            --light: #f8f9fa;
+            --dark: #1d3557;
+            --gradient-primary: linear-gradient(135deg, #1a5f7a, #3a8fb7);
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+        }
+
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1920/1080');
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .logo {
+            max-width: 280px;
+            margin: 20px auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+
+        .company-name {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section:nth-child(even) {
+            background-color: var(--light);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card {
+            text-align: center;
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 100px;
+            height: 100px;
+            background: var(--secondary);
+            transform: rotate(45deg) translateY(-70px);
+            z-index: 0;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover::before {
+            transform: rotate(45deg) translateY(-60px);
+        }
+
+        .price-wrapper {
+            position: relative;
+            height: 100px;
+            margin: 20px 0;
+        }
+
+        .price-original {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            color: #999;
+            text-decoration: line-through;
+            transition: all 0.5s;
+        }
+
+        .price-new {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            font-size: 2.5rem;
+            color: var(--primary);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .pricing-card:hover .price-original {
+            transform: translate(-50%, -100%);
+            opacity: 0;
+        }
+
+        .pricing-card:hover .price-new {
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(26, 95, 122, 0.3);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(26, 95, 122, 0.4);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .demo-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .demo-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background: var(--light);
+            transition: background 0.3s;
+        }
+
+        .demo-item:hover {
+            background: #e8f4fd;
+        }
+
+        .syllabus-level {
+            margin: 40px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .syllabus-level:hover {
+            transform: translateY(-5px);
+        }
+
+        .level-header {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .topic-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .topic-list li {
+            margin: 10px 0;
+        }
+
+        .barriers-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .barriers-list {
+            max-width: 800px;
+            margin: 40px auto;
+            list-style: none;
+        }
+
+        .barriers-list li {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .barriers-list li .cross {
+            color: var(--secondary);
+            margin-right: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .advantage-grid {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .advantage-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .advantage-item .check {
+            color: var(--accent);
+            margin-right: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .alphabet-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .alphabet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .alphabet-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .alphabet-content {
+            padding: 15px;
+        }
+
+        .alphabet-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .alphabet-row:last-child {
+            border-bottom: none;
+        }
+
+        .level-pricing {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .level-price-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin: 15px 0;
+        }
+
+        .level-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .level-price-detail {
+            text-align: right;
+        }
+
+        .level-price-old {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .level-price-new {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .call-to-action {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-text {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .headline-emphasis {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            .company-name {
+                font-size: 2rem;
+            }
+            .cta-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <!-- Replace the src attribute with your logo file path -->
+            <img src="logo.png" alt="ASPIRE THE FUTURE Logo" class="logo">
+            <h1 class="company-name" data-aos="fade-down">ASPIRE THE FUTURE</h1>
+            <h2 data-aos="fade-down">Your Gateway to a High-Paying Career in Germany</h2>
+            <p data-aos="fade-up" style="font-size: 1.2rem; margin: 20px 0;">Made Easy in Just 4 Months!</p>
+            <a href="#contact" class="btn" data-aos="zoom-in">Book Free Consultation</a>
+        </div>
+    </header>
+
+    <section class="section" id="opportunity">
+        <div class="container">
+            <h2 data-aos="fade-right">The Opportunity</h2>
+            <div class="grid">
+                <div class="card" data-aos="fade-up">
+                    <h3>4 Months to Success</h3>
+                    <p>Fast-track your career in Germany with our proven system</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Earn in Euros</h3>
+                    <p>Access high-paying job opportunities in the German market</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Structured Approach</h3>
+                    <p>Clear roadmap to overcome common barriers to success</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Barriers Section -->
+    <section class="section barriers-section" id="barriers">
+        <div class="container">
+            <h2 class="text-center" data-aos="fade-down">"If you're here, it means you've thought about working or studying in Germany. But something is stopping you. Let's be honest…"</h2>
+            
+            <ul class="barriers-list">
+                <li data-aos="fade-right">
+                    <span class="cross">❌</span> "I don't know German."
+                </li>
+                <li data-aos="fade-right" data-aos-delay="100">
+                    <span class="cross">❌</span> "It takes years to learn."
+                </li>
+                <li data-aos="fade-right" data-aos-delay="200">
+                    <span class="cross">❌</span> "I don't have a degree or high experience."
+                </li>
+                <li data-aos="fade-right" data-aos-delay="300">
+                    <span class="cross">❌</span> "The visa process is confusing."
+                </li>
+                <li data-aos="fade-right" data-aos-delay="400">
+                    <span class="cross">❌</span> "It's too expensive."
+                </li>
+            </ul>
+            
+            <div class="text-center" data-aos="zoom-in">
+                <h3>"At Aspire the Future, we don't just teach you German—we hand you the KEY to Germany."</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Advantages Section -->
+    <section class="section" id="advantages">
+        <div class="container">
+            <h2 data-aos="fade-down" class="text-center">🔥 What Makes Us Different?</h2>
+            
+            <div class="advantage-grid">
+                <div class="advantage-item" data-aos="fade-up">
+                    <span class="check">✅</span>
+                    <p><strong>Learn German (A1 to B2) in Just 4 Months</strong> – Faster Than Any Other Course!</p>
+                </div>
+                
+                <div class="advantage-item" data-aos="fade-up" data-aos-delay="100">
+                    <span class="check">✅</span>
+                    <p><strong>Online & Offline Classes</strong> – Flexible Learning, Anytime, Anywhere!</p>
+                </div>
+                
+                <div class="advantage-item" data-aos="fade-up" data-aos-delay="200">
+                    <span class="check">✅</span>
+                    <p><strong>Goethe Exam Preparation</strong> – Pass With Confidence!</p>
+                </div>
+                
+                <div class="advantage-item" data-aos="fade-up" data-aos-delay="300">
+                    <span class="check">✅</span>
+                    <p><strong>Job-Focused Training</strong> – Learn the Language Employers Want!</p>
+                </div>
+                
+                <div class="advantage-item" data-aos="fade-up" data-aos-delay="400">
+                    <span class="check">✅</span>
+                    <p><strong>Guaranteed Placement Assistance</strong> – Get Real Job Support!</p>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 40px;" data-aos="zoom-in">
+                <h3>🚀 Our students don't waste years. They follow our proven system, and within months, they are working, studying, and living in Germany!</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced German Language Demo Section -->
+    <section class="section" id="language-demo">
+        <div class="container">
+            <h2 data-aos="fade-right">Quick German Language Demo</h2>
+            
+            <!-- Original Demo Cards -->
+            <div class="demo-grid">
+                <div class="demo-card" data-aos="fade-up">
+                    <h3>Basic Greetings</h3>
+                    <div class="demo-item">
+                        <span>Hello!</span>
+                        <span>Hallo!</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Good Morning!</span>
+                        <span>Guten Morgen!</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Goodbye!</span>
+                        <span>Auf Wiedersehen!</span>
+                    </div>
+                </div>
+                
+                <div class="demo-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Common Phrases</h3>
+                    <div class="demo-item">
+                        <span>Excuse me</span>
+                        <span>Entschuldigung</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Please</span>
+                        <span>Bitte</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Thank you</span>
+                        <span>Danke</span>
+                    </div>
+                </div>
+                
+                <div class="demo-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Beverages</h3>
+                    <div class="demo-item">
+                        <span>Wine</span>
+                        <span>Wein</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Water</span>
+                        <span>Wasser</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Coffee</span>
+                        <span>Kaffee</span>
+                    </div>
+                </div>
+                
+                <div class="demo-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Family</h3>
+                    <div class="demo-item">
+                        <span>Father</span>
+                        <span>Vater</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Mother</span>
+                        <span>Mutter</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Brother</span>
+                        <span>Bruder</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Sister</span>
+                        <span>Schwester</span>
+                    </div>
+                </div>
+
+                <div class="demo-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Common Sentences</h3>
+                    <div class="demo-item">
+                        <span>My name is ____</span>
+                        <span>Ich heiße ____</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>How are you?</span>
+                        <span>Wie geht es dir?</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Can I have some water?</span>
+                        <span>Kann ich etwas Wasser haben?</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>Where are you from?</span>
+                        <span>Woher kommst du?</span>
+                    </div>
+                    <div class="demo-item">
+                        <span>What is your name?</span>
+                        <span>Wie heißt du?</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW German Alphabet Section -->
+            <h3 style="margin-top: 60px; text-align: center;" data-aos="fade-down">German Alphabet Learning</h3>
+            <div class="alphabet-grid">
+                <div class="alphabet-card" data-aos="flip-up">
+                    <div class="alphabet-header">A-E</div>
+                    <div class="alphabet-content">
+                        <div class="alphabet-row">
+                            <span>A a</span>
+                            <span>[ah]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>B b</span>
+                            <span>[bay]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>C c</span>
+                            <span>[tsay]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>D d</span>
+                            <span>[day]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>E e</span>
+                            <span>[ay]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alphabet-card" data-aos="flip-up" data-aos-delay="100">
+                    <div class="alphabet-header">F-J</div>
+                    <div class="alphabet-content">
+                        <div class="alphabet-row">
+                            <span>F f</span>
+                            <span>[eff]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>G g</span>
+                            <span>[gay]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>H h</span>
+                            <span>[hah]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>I i</span>
+                            <span>[ee]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>J j</span>
+                            <span>[yot]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alphabet-card" data-aos="flip-up" data-aos-delay="200">
+                    <div class="alphabet-header">K-O</div>
+                    <div class="alphabet-content">
+                        <div class="alphabet-row">
+                            <span>K k</span>
+                            <span>[kah]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>L l</span>
+                            <span>[ell]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>M m</span>
+                            <span>[em]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>N n</span>
+                            <span>[en]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>O o</span>
+                            <span>[oh]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alphabet-card" data-aos="flip-up" data-aos-delay="300">
+                    <div class="alphabet-header">P-T</div>
+                    <div class="alphabet-content">
+                        <div class="alphabet-row">
+                            <span>P p</span>
+                            <span>[pay]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>Q q</span>
+                            <span>[koo]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>R r</span>
+                            <span>[err]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>S s</span>
+                            <span>[ess]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>T t</span>
+                            <span>[tay]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alphabet-card" data-aos="flip-up" data-aos-delay="400">
+                    <div class="alphabet-header">U-Z</div>
+                    <div class="alphabet-content">
+                        <div class="alphabet-row">
+                            <span>U u</span>
+                            <span>[oo]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>V v</span>
+                            <span>[fow]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>W w</span>
+                            <span>[vay]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>X x</span>
+                            <span>[iks]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>Y y</span>
+                            <span>[üpsilon]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>Z z</span>
+                            <span>[tset]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alphabet-card" data-aos="flip-up" data-aos-delay="500">
+                    <div class="alphabet-header">Umlauts</div>
+                    <div class="alphabet-content">
+                        <div class="alphabet-row">
+                            <span>Ä ä</span>
+                            <span>[ay-umlaut]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>Ö ö</span>
+                            <span>[oe-umlaut]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>Ü ü</span>
+                            <span>[ue-umlaut]</span>
+                        </div>
+                        <div class="alphabet-row">
+                            <span>ß</span>
+                            <span>[eszett]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="syllabus">
+        <div class="container">
+            <h2 data-aos="fade-right">Goethe Institute Syllabus (A1 to B2)</h2>
+            
+            <div class="syllabus-level" data-aos="fade-up">
+                <h3 class="level-header">📌 A1 Level – Beginner</h3>
+                <p><strong>Goal:</strong> Understand and use everyday expressions, introduce yourself, and interact in simple conversations.</p>
+                <div class="topic-list">
+                    <h4>🔹 Topics Covered:</h4>
+                    <ul>
+                        <li>Introducing yourself and others</li>
+                        <li>Asking for and giving basic personal information</li>
+                        <li>Ordering food and drinks</li>
+                        <li>Shopping and prices</li>
+                        <li>Telling time and dates</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="syllabus-level" data-aos="fade-up">
+                <h3 class="level-header">📌 A2 Level – Elementary</h3>
+                <p><strong>Goal:</strong> Communicate in routine situations, describe personal experiences, and handle common social interactions.</p>
+                <div class="topic-list">
+                    <h4>🔹 Topics Covered:</h4>
+                    <ul>
+                        <li>Talking about past events & experiences</li>
+                        <li>Expressing preferences and opinions</li>
+                        <li>Making appointments, giving directions</li>
+                        <li>Travel and transport</li>
+                        <li>Health and emergencies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="syllabus-level" data-aos="fade-up">
+                <h3 class="level-header">📌 B1 Level – Intermediate</h3>
+                <p><strong>Goal:</strong> Express thoughts clearly on familiar topics, understand media content, and handle everyday work-life interactions.</p>
+                <div class="topic-list">
+                    <h4>🔹 Topics Covered:</h4>
+                    <ul>
+                        <li>Giving opinions and arguments</li>
+                        <li>Talking about future plans and goals</li>
+                        <li>Understanding and discussing news and current events</li>
+                        <li>Writing formal emails and letters</li>
+                        <li>Workplace communication and interviews</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="syllabus-level" data-aos="fade-up">
+                <h3 class="level-header">📌 B2 Level – Upper Intermediate</h3>
+                <p><strong>Goal:</strong> Speak fluently in discussions, understand complex texts, and express detailed viewpoints in professional settings.</p>
+                <div class="topic-list">
+                    <h4>🔹 Topics Covered:</h4>
+                    <ul>
+                        <li>Formal and business communication</li>
+                        <li>Debating and defending viewpoints</li>
+                        <li>Writing detailed reports and articles</li>
+                        <li>Analyzing literature and media</li>
+                        <li>Understanding spoken German in various dialects</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="pricing">
+        <div class="container">
+            <h2 data-aos="fade-right">April 15 2025 Batch, A1 To B2 in Just 5.5 Months</h2>
+            <div class="grid">
+                <div class="card pricing-card" data-aos="flip-left">
+                    <h3>Offline Course</h3>
+                    <div class="price-wrapper">
+                        <div class="price-original">₹90,000</div>
+                        <div class="price-new">₹71,000</div>
+                    </div>
+                    <p>Save ₹19,000</p>
+                    <a href="#contact" class="btn">Enroll Now</a>
+                </div>
+    
+                <div class="card pricing-card" data-aos="flip-left" data-aos-delay="100">
+                    <h3>Online Course</h3>
+                    <div class="price-wrapper">
+                        <div class="price-original">₹62,000</div>
+                        <div class="price-new">₹53,999</div>
+                    </div>
+                    <p>Save ₹8,000</p>
+                    <a href="#contact" class="btn">Enroll Now</a>
+                </div>
+    
+                <div class="card pricing-card" data-aos="flip-left" data-aos-delay="200">
+                    <h3>Full Payment Special</h3>
+                    <div class="price-wrapper">
+                        <div class="price-original">₹62,000</div>
+                        <div class="price-new">₹39,999</div>
+                    </div>
+                    <p>Save ₹22,000</p>
+                    <a href="#contact" class="btn">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="quote-section" data-aos="fade-up">
+        <div class="container">
+            <h2>💥 "Right now, you have two choices…"</h2>
+            <p>1️⃣ Ignore this opportunity and stay where you are. One year from now, nothing changes. You’ll still be stuck, still wondering, “What if?”</p>
+            <p>OR…</p>
+            <p>2️⃣ Take action TODAY. Learn German in just 4 months, clear the Goethe exam, and open doors to a life in Germany!</p>
+            <h3 class="quote-highlight">🚨 EXCLUSIVE OFFER: For Today’s Webinar Attendees Only!</h3>
+            <p>✅ FREE Consultation Call (Worth ₹2,000!)</p>
+            <p>✅ Special Discounts on Course Fees</p>
+            <p>✅ Fast-Track Admission to Our Next Batch</p>
+            <h3 class="quote-highlight">🚀 "The ONLY thing standing between you and that future is the action you take RIGHT NOW"</h3>
+        </div>
+    </section>
+    
+    <style>
+        .quote-section {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin: 40px 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+    
+        .quote-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+    
+        .quote-section p {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+    
+        .quote-highlight {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    
+            
+        
+                    
+                        <script>
+                            AOS.init({
+                                duration: 1000,
+                                once: true
+                            });
+                        </script>
+                    </body>
+                    </html>
